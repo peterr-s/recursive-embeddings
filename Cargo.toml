@@ -1,0 +1,8 @@
+[package]
+name = "compose"
+version = "0.1.0"
+authors = ["Peter Schoener <peter.c.schoener@gmail.com>"]
+
+[dependencies]
+tensorflow = "0.13.0"
+
