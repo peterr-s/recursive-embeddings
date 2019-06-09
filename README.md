@@ -1,6 +1,6 @@
-# compose-embeddings
+# recursive-embeddings
 
-#### UW LING 575 final project
+### UW LING 575 final project
 
 This project is designed to find generalizable embedding composition functions. The objective is to have word embeddings and a dependency parse as input, with an established sentence embedding as the target output.
 
