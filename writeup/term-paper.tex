@@ -105,7 +105,13 @@ The inputs are drawn from the Universal Dependencies corpus. This ensures high q
 
 During training, it became clear that the model would not, at least within the confines of its maximum tractable hyperparameters, be able to approximate skipthought embeddings. The vectors are initially almost perpendicular, with their cosines only declining to a test loss of 0.9994 on train and 0.9996 on test data. To achieve this optimal performance, hidden layers of 14400 units are used, with 200 epochs of training, shortly before the end of which the model's performance plateaus.
 
+However, because of the indirectness of the training method, the usefulness of the vectors is not directly tied to the training objective. In order to do a cursory comparison of the model with skipthoughts, both were tested using a linear classifier on a small polarity judgement task. The reasoning behind using a simple linear classifier is the same as in the original skipthoughts paper: this way, the direct applicability of the embeddings can be tested, as opposed to the applicability of a technique.
+
+Both the skipthoughts and the recursion model scored 54.7\% accuracy on the polarity test, which equates exactly to a guess; the models both simply guessed positive for all samples. Clearly, either both methods are flawed or they require a larger dataset for this task.
+
 \section{Discussion}
+
+One of the alarming parts of the performance of the model was the extremely high loss. In every tested configuration, the vectors started out perpendicular to each other and only very slowly began to align. Because only the zero vector is perpendicular to everything, this suggests that for some reason the trained vectors start with a great number of zeroes, of which only few are initially trained. Better initialization or an optimizer that makes smaller adjustments to more weights might be a solution to this problem, but for neither could an example yet be found through trial and error.
 
 The main issue, at least as far as could be determined from the results, was computational efficiency and power. The largest trainable models were still showing marginal improvements both with added sentence length and larger hidden layers. Whether a deeper network would have performed better could not be meaningfully tested due to how much smaller the layers would have needed to become in order to train the model on the available hardware.
 
@@ -118,6 +124,8 @@ Due to the optimization issues, the possibility of compressing each recursive se
 \section{Conclusion}
 
 In this project we attempted to create a recursive compositional model for word embeddings which could generalize up to the sentence level. Although unsuccessful, the results were promising enough that the approach is worth retooling and retesting on more powerful hardware. This project will therefore continue development in the near future.
+
+The testing will need to be rerun on a larger dataset to verify that the problem is in fact with the embeddings.
 
 \section{Bibliography}
 
